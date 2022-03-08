@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Pathfinding
+﻿namespace Pathfinding
 {
     public abstract class KindManager
     {
@@ -14,19 +8,19 @@ namespace Pathfinding
         {
             _internalPairs = new List<KindPair>();
 
-            _internalPairs.Add(new KindPair("Free", "F",ConsoleColor.White, Kind.Free));
-            _internalPairs.Add(new KindPair("Blocked", "B",ConsoleColor.Red, Kind.Blocked));
-            _internalPairs.Add(new KindPair("Uncoverd", "C", ConsoleColor.Green, Kind.Uncoverd));
-            _internalPairs.Add(new KindPair("Start", "S",ConsoleColor.Yellow, Kind.StartPoint));
-            _internalPairs.Add(new KindPair("Destination", "D",ConsoleColor.DarkMagenta, Kind.Destination));
-            _internalPairs.Add(new KindPair("Path", "P", ConsoleColor.Cyan, Kind.Path));
+            _internalPairs.Add(new KindPair("Free", "F",ConsoleColor.White, Kind.Free,true));
+            _internalPairs.Add(new KindPair("Blocked", "B",ConsoleColor.Red, Kind.Blocked,true));
+            _internalPairs.Add(new KindPair("Uncoverd", "C", ConsoleColor.Green, Kind.Uncoverd,false));
+            _internalPairs.Add(new KindPair("Start", "S",ConsoleColor.Yellow, Kind.StartPoint,true));
+            _internalPairs.Add(new KindPair("Destination", "D",ConsoleColor.DarkMagenta, Kind.Destination,true));
+            _internalPairs.Add(new KindPair("Path", "P", ConsoleColor.Cyan, Kind.Path,false));
 
         }
-        public static bool ContainsShortString(string s)
+        public static bool ContainsShortStringInGeneration(string s)
         {
             foreach (KindPair curr in _internalPairs)
             {
-                if (curr.ShortString == s)
+                if (curr.ShortString == s && curr.CanBeSetByStartCode == true)
                 {
                     return true;
                 }
@@ -73,7 +67,8 @@ namespace Pathfinding
         private string _longString;
         private string _shortString;
         private Kind _kind;
-        public KindPair(string longStr, string shortStr, ConsoleColor color, Kind givenKind)
+        private bool _canBeSetByStartCode;
+        public KindPair(string longStr, string shortStr, ConsoleColor color, Kind givenKind,bool canBeSetByStartCode)
         {
             if (_kind == Kind.None)
             {
@@ -83,6 +78,11 @@ namespace Pathfinding
             _shortString = shortStr;
             _kind = givenKind;
             _color = color;
+            _canBeSetByStartCode = canBeSetByStartCode;
+        }
+        public bool CanBeSetByStartCode
+        {
+            get { return _canBeSetByStartCode; }
         }
         public string String
         {

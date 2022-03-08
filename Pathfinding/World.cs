@@ -60,9 +60,9 @@
         {
             foreach (char curr in str)
             {
-                if (KindManager.ContainsShortString(Char.ToString(curr)) == false)
+                if (KindManager.ContainsShortStringInGeneration(Char.ToString(curr)) == false)
                 {
-                    throw new Exception("Start Code does contain a character, that is not known");
+                    throw new Exception("Start Code does contain a character, that is not known or that is allowed");
                 }
             }
             if (str.Length > (_height * _width))
