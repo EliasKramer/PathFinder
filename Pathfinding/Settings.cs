@@ -8,10 +8,10 @@ namespace Pathfinding
 {
     public static class Settings
     {
-        public const int Height = 50;
-        public const int Width = 50;
+        public const int Height = 10;
+        public const int Width = 10;
 
-        public const string StartVal = "SFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD";
+        public const string StartVal = "SFFFFFFFFFFFFFFFFFFFFFFFFFFFFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD";
         
         public const bool ShallGenerateStartVal = true;
 

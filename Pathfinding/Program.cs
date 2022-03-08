@@ -16,7 +16,7 @@ namespace Pathfinding
             int foundTheWayCount = 0;
             float successRateInPercent = 0;
             bool lastWasFound = false;
-            bool infiniteLoop = Settings.Iterations == -1;
+            bool infiniteLoop = Settings.Iterations == -1 && Settings.ShallGenerateStartVal;
 
             if (!Settings.ShallGenerateStartVal)
             {

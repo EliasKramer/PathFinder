@@ -14,7 +14,6 @@
             _internalPairs.Add(new KindPair("Start", "S",ConsoleColor.Yellow, Kind.StartPoint,true));
             _internalPairs.Add(new KindPair("Destination", "D",ConsoleColor.DarkMagenta, Kind.Destination,true));
             _internalPairs.Add(new KindPair("Path", "P", ConsoleColor.Cyan, Kind.Path,false));
-
         }
         public static bool ContainsShortStringInGeneration(string s)
         {
