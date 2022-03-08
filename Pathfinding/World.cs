@@ -6,6 +6,7 @@
         private int _width;
         private Field[,] _internArr;
         private Field _startField;
+        private List<Field> _calculatedPath;
         public World(int givenHeight, int givenWidth, string startCode)
         {
             _height = givenHeight;
@@ -71,6 +72,13 @@
             }
 
         }
+        public List<Field> Path
+        {
+            set
+            {
+                _calculatedPath = value;
+            }
+        }
         private int IndexForCordinates(int h, int w)
         {
             return h * _width + w;
@@ -81,7 +89,7 @@
             int h = idx / _width;// idx % _height;
             int w = idx % _width;
 
-             List<Field> result = new List<Field>();
+            List<Field> result = new List<Field>();
 
             result.Add(GetField(h, w + 1));
             result.Add(GetField(h, w - 1));
@@ -104,7 +112,7 @@
         { get { return _startField; } }
         public void Print()
         {
-            Console.Clear();
+            Console.SetCursorPosition(0, 0);
             for (int h = 0; h < _height; h++)
             {
                 for (int w = 0; w < _width; w++)
@@ -112,6 +120,37 @@
                     _internArr[h, w].Print();
                 }
                 Console.WriteLine();
+            }
+        }
+        public void SetAllCalculatedPathsToFree()
+        {
+            for (int h = 0; h < _height; h++)
+            {
+                for (int w = 0; w < _width; w++)
+                {
+                    if (_internArr[h, w].Kind == Kind.Uncoverd || _internArr[h, w].Kind == Kind.Path)
+                    {
+                        _internArr[h, w].Kind = Kind.Free;
+                    }
+                }
+            }
+        }
+        public void PrintPathSlow()
+        {
+            if (Settings.PrintModeForPath != Settings.PathPrintMode.Slow)
+            {
+                throw new Exception("Cannot print slow, if the mode is not slow");
+            }
+            if (_calculatedPath == null)
+            {
+                throw new Exception("The calculatedPath was for some reason not set");
+            }
+
+            for (int i = _calculatedPath.Count-1; i >= 0; i--)
+            {
+                _calculatedPath[i].Kind = Kind.Path;
+                Print();
+                Thread.Sleep(Settings.MsBetweenNewDrawnPath);
             }
         }
     }

@@ -18,11 +18,11 @@ namespace Pathfinding
             _upperBranches = new List<Node>();
             _upperBranches.Add(_root);
         }
-        public void SearchForDestination()
+        public bool SearchForDestination()
         {
-            SetBranchForRoot(_root);
+            return SetBranchForRootAndSearchForDestination(_root);
         }
-        private void SetBranchForRoot(Node givenRoot)
+        private bool SetBranchForRootAndSearchForDestination(Node givenRoot)
         {
             List<Field> neighbourFields = _world.GetNeigbours(givenRoot.Field.Index);
 
@@ -41,33 +41,43 @@ namespace Pathfinding
                 }
                 if (branch.Field.Kind == Kind.Destination)
                 {
-                    DrawPathFromStartToDestination(branch);
-                    return;
+
+                    List<Field> path = PathToDestination(branch);
+
+                    if (Settings.PrintModeForPath == Settings.PathPrintMode.Slow)
+                    {
+                        _world.SetAllCalculatedPathsToFree();
+                        _world.Path = path;
+                    }
+                    return true;
                 }
             }
             _upperBranches.Remove(givenRoot);
             if (_upperBranches.Count != 0)
             {
-                SetBranchForRoot(_upperBranches[0]);
+                return SetBranchForRootAndSearchForDestination(_upperBranches[0]);
             }
-
+            return false;
         }
-        private List<Node> DrawPathFromStartToDestination(Node node)
+        private List<Field> PathToDestination(Node node)
         {
-            List<Node> path = new List<Node>();
+            List<Field> path = new List<Field>();
 
             Node curr = node.Root;
             while (curr != null)
             {
                 if (curr.Root != null)
                 {
-                    path.Add(curr);
+                    path.Add(curr.Field);
                 }
                 curr = curr.Root;
             }
-            foreach (Node currPath in path)
+            if (Settings.PrintModeForPath == Settings.PathPrintMode.Instant)
             {
-                currPath.Field.Kind = Kind.Path;
+                foreach (Field currPath in path)
+                {
+                    currPath.Kind = Kind.Path;
+                }
             }
             return path;
         }
