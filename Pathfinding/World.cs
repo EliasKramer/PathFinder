@@ -96,6 +96,14 @@
             result.Add(GetField(h + 1, w));
             result.Add(GetField(h - 1, w));
 
+            if (Settings.AllowDiagonals)
+            {
+                result.Add(GetField(h + 1, w + 1));
+                result.Add(GetField(h - 1, w + 1));
+                result.Add(GetField(h + 1, w - 1));
+                result.Add(GetField(h - 1, w - 1));
+            }
+
             result.RemoveAll(item => item == null);
 
             return result;
@@ -147,7 +155,7 @@
                 throw new Exception("The calculatedPath was for some reason not set");
             }
 
-            for (int i = _calculatedPath.Count-1; i >= 0; i--)
+            for (int i = _calculatedPath.Count - 1; i >= 0; i--)
             {
                 _calculatedPath[i].Kind = Kind.Path;
                 Print();

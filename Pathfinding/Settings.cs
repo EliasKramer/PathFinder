@@ -15,12 +15,12 @@ namespace Pathfinding
         
         public const bool ShallGenerateStartVal = true;
 
-        public const PathPrintMode PrintModeForPath = PathPrintMode.ShowSearchProcess;
+        public const PathPrintMode PrintModeForPath = PathPrintMode.PrintPathSlow;
         //delay for showsearchprocess
         public const int MsBetweenSearchUpdates = 0;
 
         //path settings (only matter when path print mode is on PrintPathSlow)
-        public const int MsBetweenNewDrawnPath = 50;
+        public const int MsBetweenNewDrawnPath = 10;
 
         //print settings (only matter when ShallGenerateStartVal is true)
         public const int Iterations = int.MaxValue;
@@ -28,7 +28,7 @@ namespace Pathfinding
         public const bool ShallPrintStatusEveryIteration = true;
         public const float TimeBeforeNextPictureInSeconds = 1f;
 
-        public const bool ShallOnlyPrintIfItFoundSomething = false;
+        public const bool ShallOnlyPrintIfItFoundSomething = true;
 
         //advanced generation settings
 
@@ -44,9 +44,9 @@ namespace Pathfinding
 
         //if 0.5 half the blocks have a chance of getting blocked.
         //if it is getting over 1 it is really unlikely a path is found.
-        public const float BlockedRatio = 0.3f;
+        public const float BlockedRatio = 0.8f;
 
-
+        public const bool AllowDiagonals = true;
         public enum PathPrintMode{
             Instant,
             ShowSearchProcess,
