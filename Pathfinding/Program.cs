@@ -62,7 +62,7 @@ namespace Pathfinding
         }
         private static void PrintWorld(World w, bool slowPathPrintingAllowed)
         {
-            if (Settings.PrintModeForPath == Settings.PathPrintMode.Slow && slowPathPrintingAllowed)
+            if (Settings.PrintModeForPath == Settings.PathPrintMode.PrintPathSlow && slowPathPrintingAllowed)
             {
                 w.PrintPathSlow();
             }

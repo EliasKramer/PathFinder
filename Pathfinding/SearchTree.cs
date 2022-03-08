@@ -44,7 +44,7 @@ namespace Pathfinding
 
                     List<Field> path = PathToDestination(branch);
 
-                    if (Settings.PrintModeForPath == Settings.PathPrintMode.Slow)
+                    if (Settings.PrintModeForPath == Settings.PathPrintMode.PrintPathSlow)
                     {
                         _world.SetAllCalculatedPathsToFree();
                         _world.Path = path;
@@ -55,6 +55,14 @@ namespace Pathfinding
             _upperBranches.Remove(givenRoot);
             if (_upperBranches.Count != 0)
             {
+                if (Settings.PrintModeForPath == Settings.PathPrintMode.ShowSearchProcess)
+                {
+                    _world.Print();
+                    if(Settings.MsBetweenSearchUpdates > 0)
+                    {
+                        Thread.Sleep(Settings.MsBetweenSearchUpdates);
+                    }
+                }
                 return SetBranchForRootAndSearchForDestination(_upperBranches[0]);
             }
             return false;
@@ -72,7 +80,8 @@ namespace Pathfinding
                 }
                 curr = curr.Root;
             }
-            if (Settings.PrintModeForPath == Settings.PathPrintMode.Instant)
+            if (Settings.PrintModeForPath == Settings.PathPrintMode.Instant ||
+                Settings.PrintModeForPath == Settings.PathPrintMode.ShowSearchProcess)
             {
                 foreach (Field currPath in path)
                 {

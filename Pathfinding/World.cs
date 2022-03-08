@@ -112,6 +112,7 @@
         { get { return _startField; } }
         public void Print()
         {
+            Console.CursorVisible = false;
             Console.SetCursorPosition(0, 0);
             for (int h = 0; h < _height; h++)
             {
@@ -137,7 +138,7 @@
         }
         public void PrintPathSlow()
         {
-            if (Settings.PrintModeForPath != Settings.PathPrintMode.Slow)
+            if (Settings.PrintModeForPath != Settings.PathPrintMode.PrintPathSlow)
             {
                 throw new Exception("Cannot print slow, if the mode is not slow");
             }
