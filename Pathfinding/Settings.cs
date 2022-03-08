@@ -8,8 +8,8 @@ namespace Pathfinding
 {
     public static class Settings
     {
-        public const int Height = 30;
-        public const int Width = 30;
+        public const int Height = 50;
+        public const int Width = 50;
 
         public const string StartVal = "SFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD";
         
@@ -23,7 +23,8 @@ namespace Pathfinding
         public const int MsBetweenNewDrawnPath = 10;
 
         //print settings (only matter when ShallGenerateStartVal is true)
-        public const int Iterations = int.MaxValue;
+        //-1 for infinite loop
+        public const int Iterations = -1;
 
         public const bool ShallPrintStatusEveryIteration = true;
         public const float TimeBeforeNextPictureInSeconds = 1f;
@@ -47,6 +48,7 @@ namespace Pathfinding
         public const float BlockedRatio = 0.8f;
 
         public const bool AllowDiagonals = true;
+        public const bool ShallNotPrintFreeFields = true;
         public enum PathPrintMode{
             Instant,
             ShowSearchProcess,

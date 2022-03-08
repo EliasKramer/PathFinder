@@ -16,12 +16,14 @@ namespace Pathfinding
             int foundTheWayCount = 0;
             float successRateInPercent = 0;
             bool lastWasFound = false;
+            bool infiniteLoop = Settings.Iterations == -1;
+
             if (!Settings.ShallGenerateStartVal)
             {
                 iterations = 1;
             }
 
-            for (int i = 1; i <= iterations; i++)
+            for (int i = 1; i <= iterations || infiniteLoop ; i++)
             {
                 if (Settings.ShallGenerateStartVal)
                 {

@@ -28,6 +28,10 @@ namespace Pathfinding
 
         public override string ToString()
         {
+            if(Settings.ShallNotPrintFreeFields && Kind == Kind.Free)
+            {
+                return "   ";
+            }
             return "[" + KindManager.KindToString(_kind,KindStringLength.Short) + "]";
         }
         public void Print()
