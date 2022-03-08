@@ -13,10 +13,6 @@ namespace Pathfinding
             int length = h * w;
             char[] retVal = new char[length];
 
-            float maxStartPointInRatio = 0.2f;
-
-            float minDestinationPointInRatio = 0.8f;
-
             for (int i = 0; i < length; i++)
             {
                 retVal[i] = 'F';
@@ -24,21 +20,20 @@ namespace Pathfinding
 
             Random random = new Random();
 
-            int startPos = random.Next((int)((float)length*maxStartPointInRatio));
+            int startPos = random.Next((int)((float)length* Settings.StartPointRatio));
             retVal[startPos] = 'S';
 
             int destPos = -1;
             do
             {
-                destPos = random.Next((int)((float)length * minDestinationPointInRatio), length);
+                destPos = random.Next((int)((float)length * Settings.DestinationPointRatio), length);
             } while (destPos == startPos);
 
             retVal[destPos] = 'D';
 
             int countOfFreeFields = length - 2;
-            float maxBlockedRatio = 0.5f;
 
-            int maxBlockedTotal = (int)((float)countOfFreeFields * maxBlockedRatio);
+            int maxBlockedTotal = (int)((float)countOfFreeFields * Settings.BlockedRatio);
 
             for(int i = 0; i < maxBlockedTotal; i++)
             {

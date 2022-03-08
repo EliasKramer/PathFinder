@@ -27,6 +27,23 @@ namespace Pathfinding
 
         public const bool ShallOnlyPrintIfItFoundSomething = true;
 
+        //advanced generation settings
+
+        //the percentage where the destination start cannot be
+        //0.8 can be only be above 20% of the fields
+        //0.2 can be only be above 80% of the fields
+        public const float StartPointRatio = 0.2f;
+
+        //the percentage where the destination adress can start
+        //0.8 can be only lower than 80% of the fields
+        //0.2 can be only lower than 20% of the fields
+        public const float DestinationPointRatio = 0.8f;
+
+        //if 0.5 half the blocks have a chance of getting blocked.
+        //if it is getting over 1 it is really unlikely a path is found.
+        public const float BlockedRatio = 0.5f;
+
+
         public enum PathPrintMode{
             Instant,
             Slow
