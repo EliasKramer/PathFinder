@@ -44,10 +44,9 @@ namespace Pathfinding
                     DrawPathFromStartToDestination(branch);
                     return;
                 }
-
             }
             _upperBranches.Remove(givenRoot);
-            if(_upperBranches.Count != 0)
+            if (_upperBranches.Count != 0)
             {
                 SetBranchForRoot(_upperBranches[0]);
             }
@@ -66,7 +65,6 @@ namespace Pathfinding
                 }
                 curr = curr.Root;
             }
-
             foreach (Node currPath in path)
             {
                 currPath.Field.Kind = Kind.Path;
